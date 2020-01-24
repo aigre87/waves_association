@@ -1,0 +1,100 @@
+@import "../mixins";
+.footer {
+  color: #fff;
+  background: #000;
+  padding-top: rem(160);
+  padding-bottom: rem(75);
+  a{
+    color: #fff;
+  }
+  &__iw {
+    grid-template-rows: [top] auto [bottom] auto;
+    grid-row-gap: rem(156);
+  }
+  &__menu{
+    grid-row: top;
+    grid-column: 1 / span 5;
+  }
+  &__content {
+    grid-row: top;
+    grid-column: 6 / -1;
+  }
+  &__scrolltop {
+    cursor: pointer;
+    grid-row: bottom;
+    grid-column: 1 / span 5;
+  }
+  &__copyright {
+    display: flex;
+    align-items: center;
+    grid-row: bottom;
+    grid-column: 6 / -1;
+  }
+
+  &__menu {
+    position: relative;
+
+    &-items {
+      display: grid;
+      grid-column-gap: var(--grid-column-gap);
+      grid-template-columns: repeat(5, 1fr);
+      grid-row-gap: rem(16);
+    }
+    &-item-line{
+      width: 100%;
+      grid-column: 1/2;
+      pointer-events: none;
+      @include txt-20();
+      position: relative;
+      &:before{
+        content: '';
+        position: absolute;
+        left: 0;
+        top:50%;
+        margin-top: -1px;
+        height: 1px;
+        width: 60%;
+        background: var(--blue);
+      }
+    }
+    &-item {
+      grid-column: 2/6;
+      a {
+        @include txt-20();
+      }
+    }
+  }
+
+  &__content {
+    &-text {
+      @include txt-20();
+      margin-bottom: rem(33);
+    }
+
+    &-contacts {
+
+      &-label {
+        @include txt-14();
+        color: #fff;
+        opacity: 0.5;
+        margin-bottom: rem(5);
+      }
+
+      &-link {
+        @include txt-26();
+      }
+    }
+  }
+
+  &__scrolltop {
+
+    &-trigger {
+      opacity: 0.5;
+      @include txt-26();
+    }
+  }
+
+  &__copyright {
+    @include txt-20();
+  }
+}

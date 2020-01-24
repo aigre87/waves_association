@@ -1,0 +1,35 @@
+/*MEDIA QUERIES*/
+@import '~include-media/dist/_include-media.scss';
+$breakpoints: (
+        phone: 767px,
+        tablet: 1025px,
+        desktop: 1200px,
+);
+
+$browser-context: 16;
+@function rem($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}rem;
+}
+@function sass-calc($val1, $val2) {
+  @return #{$val1/$val2};
+}
+
+@mixin txt-14(){
+  font-size: rem(14);
+  line-height: sass-calc(24,14);
+  color: #6D6D6D;
+}
+@mixin txt-20(){
+  font-size: rem(20);
+  line-height: sass-calc(32,20);
+}
+@mixin txt-26(){
+  font-size: rem(26);
+  line-height: sass-calc(32,20);
+}
+@mixin txt-label(){
+  color: var(--blue);
+  text-transform: uppercase;
+  font-size: rem(14);
+  line-height: sass-calc(16,14);
+}

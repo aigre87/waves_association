@@ -1,0 +1,17 @@
+.page-wrapper{
+  font-family: 'Montserrat';
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout {
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--wrapper);
+  &--grid{
+    display: grid;
+    grid-column-gap: var(--grid-column-gap);
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+  }
+}
