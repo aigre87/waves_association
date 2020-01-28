@@ -7,7 +7,7 @@ import fragShaderFinal from './fragment-final.glsl';
 import testShader from './test-shader.glsl';
 import vertexShader from './vertex.glsl';
 import mouseSpeed from '../libs/mouse-speed'
-import BasicShader from './BasicShader.js';
+import BasicShader from './BasicShader';
 import BufferManager from './BufferManager';
 
 class App {
@@ -32,12 +32,10 @@ class App {
 
     init() {
         this.block = document.getElementById('introBlock');
-        this.blockWidth = this.block.offsetWidth;
-        this.blockHeight = this.block.offsetHeight;
 
         this.scene = new THREE.Scene();
         this.scene2 = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(80, this.blockWidth / this.blockHeight, 0.1, 1000);
+        this.camera = new THREE.PerspectiveCamera(80, this.block.offsetWidth / this.block.offsetHeight, 0.1, 1000);
         this.camera.position.set(0, 0, 1);
 
         this.renderer = new THREE.WebGLRenderer({
@@ -52,6 +50,7 @@ class App {
         // this.controls.enabled = true;
         // this.controls.maxDistance = 1500;
         // this.controls.minDistance = 0;
+
 
 
         document.addEventListener('mousemove', (e) => {
@@ -73,6 +72,8 @@ class App {
         this.createObj();
         this.onResize();
         this.animate();
+
+        window.scene = this.scene;
     }
 
     createUniforms() {
@@ -108,26 +109,27 @@ class App {
     }
 
     createObj() {
-        const that = this;
         this.targets = [
-            this.targetA = new BufferManager(this.renderer, { width: that.blockWidth, height: that.blockHeight }),
-            this.targetB = new BufferManager(this.renderer, { width: that.blockWidth, height: that.blockHeight }),
-            this.targetC = new BufferManager(this.renderer, { width: that.blockWidth, height: that.blockHeight })
+            this.targetA = new BufferManager(this.renderer, { width: this.width, height: this.height }),
+            this.targetB = new BufferManager(this.renderer, { width: this.width, height: this.height }),
+            this.targetC = new BufferManager(this.renderer, { width: this.width, height: this.height })
         ];
         this.buffers = [
-            this.bufferA = new BasicShader(fragShaderTrail, {
-                ...that.uniforms
+            this.bufferA = new BasicShader(testShader, {
+                u_channel0: { value: this.channel0 },
+                u_channel1: { value: null },
+                ...this.uniforms
             }),
 
             // this.bufferB = new BasicShader(fragShaderTrail, {
             //     u_channel0: { value: null },
-            //     ...that.uniforms
+            //     ...this.uniforms
             // }),
             //
             // this.bufferImage = new BasicShader(fragShaderFinal, {
             //     u_channel0: { value: this.channel0 },
             //     u_channel1: { value: null },
-            //     ...that.uniforms
+            //     ...this.uniforms
             // }),
         ];
     }
@@ -138,10 +140,18 @@ class App {
             this.time += 1.0;
             this.uniforms.u_time.value = this.time;
 
-            this.uniforms.texture.value = this.targetA.readBuffer.texture
-            this.targetA.render(this.bufferA.scene, this.camera)
+            this.bufferA.uniforms['u_time'].value = this.time;
 
-            this.targetA.render(this.bufferA.scene, this.camera, true, true)
+            // this.bufferA.uniforms['u_channel0'].value = this.targetA.readBuffer.texture
+            // this.bufferA.uniforms['u_channel1'].value = this.targetB.readBuffer.texture
+            this.targetA.render(this.bufferA.scene, this.camera)
+            //
+            // this.bufferB.uniforms['u_channel0'].value = this.targetB.readBuffer.texture
+            // this.targetB.render(this.bufferB.scene, this.camera)
+            //
+            // this.bufferImage.uniforms['u_channel1'].value = this.targetA.readBuffer.texture
+            // this.targetC.render(this.bufferImage.scene, this.camera, true)
+
             this.animate()
         });
     }

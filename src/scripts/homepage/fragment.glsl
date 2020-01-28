@@ -10,8 +10,9 @@ uniform float u_time;
 uniform float u_mouseSpeed;
 //
 //
-uniform sampler2D img1;
-uniform sampler2D video;
+uniform sampler2D texture;
+uniform sampler2D u_img1;
+uniform sampler2D u_video;
 varying vec2 vUv;
 
 float circle(in vec2 _st, in float _radius, in vec2 _mouseN){
@@ -25,7 +26,7 @@ void main() {
 
 	vec2 st = gl_FragCoord.xy/u_resolution;
 
-	vec4 img = texture2D(img1, vUv);
+	vec4 img = texture2D(u_img1, vUv);
 
 	vec2 ratio = vec2(
 		min((u_resolution.x / u_resolution.y) / (u_imageResolution.x / u_imageResolution.y), 1.0),
@@ -42,22 +43,31 @@ void main() {
 	float mouseDis = distance(uv,mouseN);
 	vec3 mouseColor = vec3(mouseDis);
 
-	//gl_FragColor = texture2D(img1, uv);
+	//gl_FragColor = texture2D(u_img1, uv);
 
 	// частота , быстрота , высота
 	// float distort = sin(uv.x * 10.0 + u_time*10.0)*0.02;
-	float distort = sin((uv.x * 10.0) + u_time*10.0)*0.02;
+	float distort = sin((uv.x * 15.0) + u_time*5.0)*0.03;
 	// градиентная карта воды
 	vec4 vGrad = vec4(vec3(pow( 1.0-st.y ,2.0)),1.0);
 
 	vec3 circleColor = vec3(circle(uv,0.1,mouseN));
 //
-	vec4 color = texture2D(img1, vec2(uv.x,
-			uv.y
-			+ distort
-			// * vGrad.r
-			//* circleColor.r
-			// * ((u_mouseSpeed+10.0)*0.02)
+//	vec4 color = texture2D(u_img1, vec2(uv.x,
+//			uv.y
+//			+ distort
+//			* vGrad.r
+////			* circleColor.r
+////			* ((u_mouseSpeed+10.0)*0.02)
+//		)
+//	);
+
+	vec4 color = texture2D(texture, vec2(uv.x,
+		uv.y
+		+ distort
+		* vGrad.r
+		//			* circleColor.r
+		//			* ((u_mouseSpeed+10.0)*0.02)
 		)
 	);
 
@@ -91,7 +101,7 @@ void main() {
 //			min((u_resolution.y / u_resolution.x) / (u_imageResolution.y / u_imageResolution.x), 1.0)
 //		);
 //	vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-//	vec4 color = texture2D(img1, uv + vec2(0.0, -0.002));
+//	vec4 color = texture2D(u_img1, uv + vec2(0.0, -0.002));
 //
 //	vec2 center = mouseN;
 //	uv.x *= 1.7;
