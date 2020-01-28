@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "parcel src/pages/index.html src/pages/test.html src/pages/about.html",
+    "dev": "parcel src/pages/*",
     "build": "parcel build src/pages/index.html src/pages/about.html"
   },
   "devDependencies": {

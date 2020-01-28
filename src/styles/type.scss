@@ -20,11 +20,29 @@ h3, .h3{
   line-height: sass-calc(32,26);
 }
 h4, .h4{
-
+  font-weight: normal;
+  font-size: rem(26);
+  line-height: sass-calc(32,26);
 }
 h5, .h5{
 
 }
 h6, .h6{
 
+}
+
+p{
+
+}
+
+ul{
+  li{
+
+  }
+}
+
+ol{
+  li{
+
+  }
 }

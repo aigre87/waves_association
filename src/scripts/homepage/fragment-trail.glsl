@@ -5,7 +5,7 @@ uniform vec2 u_resolution;
 uniform float u_ratio;
 varying vec2 vUv;
 uniform sampler2D u_img1;
-uniform sampler2D texture;
+uniform sampler2D u_textureRadialGrad;
 float circle(vec2 uv, vec2 disc_center, float disc_radius, float border_size) {
 	uv -= disc_center;
 	float dist = sqrt(dot(uv, uv));
@@ -32,15 +32,12 @@ void main() {
 	vec2 uv = vUv;
 	vec2 col = uv;
 	if (u_time > 2.0) {
-
-		col = texture2D(texture,uv).xy;
-
+		col = texture2D(u_textureRadialGrad,uv).xy * 0.98;
 		vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-		vec3 stack = vec3(0.0,0.0,0.0);
 		vec2 mouseNew = vec2(u_mouse.x, u_resolution.y - u_mouse.y);
 
-		vec3 blob = vec3(.11-clamp(length((gl_FragCoord.xy-mouseNew.xy)/u_resolution.x),0.,.11))*10.;
-		gl_FragColor = vec4(col + blob.xy, 0.0, 1.0);
+		vec3 blob = vec3(.11-clamp(length((gl_FragCoord.xy-mouseNew.xy)/u_resolution.x),0.,.11))*(u_mouseSpeed*0.5);
+		gl_FragColor = vec4( col.x + blob.x, col.x + blob.x, col.x + blob.x, 1.0);
 	}else{
 		vec2 uv = gl_FragCoord.xy / u_resolution.xy;
 		vec3 stack = vec3(0.0,0.0,0.0);

@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import OrbitControls from 'orbit-controls-es6';
 import { gsap } from "gsap";
-import fragShader from './fragment.glsl';
+import shaderWaves from './fragment.glsl';
 import fragShaderTrail from './fragment-trail.glsl';
 import fragShaderFinal from './fragment-final.glsl';
 import testShader from './test-shader.glsl';
@@ -77,9 +77,9 @@ class App {
 
     createUniforms() {
         const loader = new THREE.TextureLoader( );
-        this.channel0 = loader.load('../images/grid.png');
-        this.channel0.minFilter = THREE.LinearFilter;
-        const channel0 = this.texture;
+        this.u_img1 = loader.load('../images/grid.png');
+        this.u_img1.minFilter = THREE.LinearFilter;
+        const img1 = this.u_img1;
 
         this.video = document.getElementById( 'intro__bg-video' );
         this.video.defaultPlaybackRate = -1;
@@ -95,15 +95,16 @@ class App {
         this.video.format = THREE.RGBFormat;
         const time = this.time;
         this.uniforms = {
-            u_img1: { type: 't', value: channel0 },
-            u_video: { type: 't', value: videoTexture },
+            u_img1: { type: 't', value: img1 },
             u_time: { type: 'f', value: time },
             u_imageResolution: { type: 'v2', value: new THREE.Vector2(1920, 1080), },
             u_resolution: { type: 'v2', value: new THREE.Vector2() },
             u_ratio: { type: 'f', value: 1.0 },
             u_mouse: { type: 'v2', value: new THREE.Vector2() },
             u_mouseSpeed: { type: 'f', value: 0.0 },
-            texture: { type: 't', value: null },
+            u_video: { type: 't', value: videoTexture },
+            u_textureRadialGrad: { type: 't', value: null },
+            u_textureRadialGrad_new: { type: 't', value: null },
         };
     }
 
@@ -119,11 +120,10 @@ class App {
                 ...that.uniforms
             }),
 
-            // this.bufferB = new BasicShader(fragShaderTrail, {
-            //     u_channel0: { value: null },
-            //     ...that.uniforms
-            // }),
-            //
+            this.bufferWaves = new BasicShader(shaderWaves, {
+                ...that.uniforms
+            }),
+
             // this.bufferImage = new BasicShader(fragShaderFinal, {
             //     u_channel0: { value: this.channel0 },
             //     u_channel1: { value: null },
@@ -138,20 +138,30 @@ class App {
             this.time += 1.0;
             this.uniforms.u_time.value = this.time;
 
-            this.uniforms.texture.value = this.targetA.readBuffer.texture
+            this.uniforms.u_textureRadialGrad.value = this.targetA.readBuffer.texture
             this.targetA.render(this.bufferA.scene, this.camera)
+            //
+            //
+            // this.targetA.render(this.bufferA.scene, this.camera, true, true)
 
-            this.targetA.render(this.bufferA.scene, this.camera, true, true)
+            // this.uniforms.u_textureRadialGrad_new.value = this.targetA.readBuffer.texture
+            //
+            this.targetB.render(this.bufferWaves.scene, this.camera)
+            //
+            this.targetB.render(this.bufferWaves.scene, this.camera, true, true)
+
             this.animate()
+
         });
     }
 
     onResize() {
-        this.width = this.block.offsetWidth;
-        this.height = this.block.offsetHeight;
+        this.blockWidth = this.block.offsetWidth;
+        this.blockHeight = this.block.offsetHeight;
         this.renderer.setSize(this.blockWidth, this.blockHeight);
         this.targets.forEach( (target) => {
             target.readBuffer.setSize(this.blockWidth, this.blockHeight);
+            target.writeBuffer.setSize(this.blockWidth, this.blockHeight);
         });
 
         this.uniforms.u_resolution.value.x = this.blockWidth;

@@ -17,7 +17,7 @@ $browser-context: 16;
 @mixin txt-14(){
   font-size: rem(14);
   line-height: sass-calc(24,14);
-  color: #6D6D6D;
+  color: var(--dark-gray);
 }
 @mixin txt-20(){
   font-size: rem(20);

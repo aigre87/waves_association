@@ -1,9 +1,39 @@
 @import "../mixins";
 .header{
+  $root: &;
+  --logo-ico-left: #000;
+  --logo-ico-right: var(--blue);
+  --logo-text-top: #000;
+  --logo-text-bottom: var(--blue);
+  --menu-bg: #000;
+  --burger-color: #fff;
   width: 100%;
-  position: absolute;
+  position: fixed;
   z-index: 10;
+  &--dark{
+    --logo-ico-left: #000;
+    --logo-ico-right: var(--blue);
+    --logo-text-top: #000;
+    --logo-text-bottom: var(--blue);
+    --burger-color: #000;
+  }
+  &--light{
+    --logo-ico-left: #fff;
+    --logo-ico-right: #fff;
+    --logo-text-top: #fff;
+    --logo-text-bottom: #fff;
+    --burger-color: #fff;
+  }
+  &--open{
+    --logo-ico-left: #fff;
+    --logo-ico-right: var(--blue);
+    --logo-text-top: #fff;
+    --logo-text-bottom: var(--blue);
+    --burger-color: #fff;
+  }
   &__iw{
+    position: relative;
+    z-index: 2;
     padding-top: rem(80);
     display: flex;
     justify-content: space-between;
@@ -14,6 +44,29 @@
     &-icon{
       max-width: rem(205);
       height: auto;
+      &-word{
+        &--top{
+          fill: var(--logo-text-top);
+        }
+        &--bottom{
+          fill: var(--logo-text-bottom);
+          #{$root}--light:not(#{$root}--open) &{
+            opacity: 0.5;
+          }
+        }
+      }
+      &-ic{
+        &--left{
+          fill: var(--logo-ico-left);
+        }
+        &--right{
+          fill: var(--logo-ico-right);
+          #{$root}--light:not(#{$root}--open) &{
+            opacity: 0.5;
+          }
+        }
+      }
+
     }
   }
   &__rc{
@@ -44,29 +97,107 @@
       &:after{
         content: '';
         display: block;
-        background: #fff;
+        background: var(--burger-color);
         width: 100%;
         height: 3px;
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
+        top: 50%;
+        transform-origin: 0% 50%;
       }
       &:before{
-        top: calc(50% - 5px);
+        transform: translate(-50%,calc(-50% - 5px));
+        #{$root}--open &{
+          transform: rotate(45deg) translate(-50%, 0%);
+        }
       }
       &:after{
-        top: calc(50% + 5px);
+        transform: translate(-50%,calc(-50% + 5px));
+        #{$root}--open &{
+          transform: rotate(-45deg) translate(-50%, 0%);
+        }
       }
     }
   }
   &__menu{
     display: none;
-    &-items{
-      display: flex;
-      align-items: center;
+    padding-top: rem(200);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--menu-bg);
+    #{$root}--open &{
+      display: block;
     }
-    &-item{
+    &-iw{
+      height: 100%;
+      display: flex;
+      // align-items: center;
+      overflow-y: scroll;
+    }
+    &-layout{
+    }
+    &-nav{
+      grid-area: 1 / 2 / 1 / 6;
+      &-title{
+        @include txt-label;
+        color: var(--blue);
+        margin-bottom: rem(33);
+      }
+      &-items{
 
+      }
+      &-item{
+        margin-bottom: rem(25);
+        position: relative;
+        &:last-child{
+          margin-bottom: 0;
+        }
+        a{
+          color: #fff;
+          &.active{
+            &:before{
+              display: block;
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 50%;
+              transform: translate(-150%,-50%);
+              background: var(--blue);
+              width: rem(48);
+              height: 3px;
+            }
+          }
+        }
+      }
+    }
+    &-news{
+      grid-area: 1 / 7 / 1 / 12;
+      &-title{
+        @include txt-label;
+        color: var(--blue);
+        margin-bottom: rem(40);
+      }
+      &-items{
+
+      }
+      &-item{
+        margin-bottom: rem(40);
+        &:last-child{
+          margin-bottom: 0;
+        }
+        &-name{
+          @include txt-20;
+          color: #fff;
+          margin-bottom: rem(8);
+        }
+        &-desc{
+          @include txt-14;
+          color: var(--dark-gray);
+        }
+      }
     }
   }
 }

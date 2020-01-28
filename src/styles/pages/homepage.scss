@@ -144,7 +144,7 @@
     &__main-row{
       display: grid;
       grid-column-gap: var(--grid-column-gap);
-      grid-template-columns: [lc] 4fr [rc] 6fr;
+      grid-template-columns: [lc] 3fr [gutter] 1fr [rc] 6fr;
     }
     &__index {
       @include txt-label();
