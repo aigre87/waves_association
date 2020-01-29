@@ -5,6 +5,7 @@
   height: 100vh;
   min-height: 500px;
   display: flex;
+  background: #000;
   &__bg{
     position: absolute;
     left: 0;
@@ -37,8 +38,7 @@
     z-index: 1;
   }
   &__title{
-    font-weight: bold;
-    font-size: rem(56);
+
   }
   &__scroll{
     position: absolute;
@@ -52,11 +52,20 @@
 
 .mission {
   margin-top: rem(160);
+  @include media('<=phone'){
+    margin-top: rem(80);
+  }
   &__lc {
     grid-area: 1 / 2 / 1 / 6;
+    @include media('<=phone'){
+      grid-area: 1 / 1 / 1 / 13;
+    }
   }
   &__rc {
     grid-area: 1 / 6 / 1 / 12;
+    @include media('<=phone'){
+      grid-area: 2 / 1 / 2 / 13;
+    }
   }
   &__title {
 
@@ -87,11 +96,21 @@
 
 .goals {
   margin-top: rem(298);
+  @include media('<=phone'){
+    margin-top: rem(80);
+  }
   &__lc {
     grid-area: 1 / 2 / 1 / 7;
+    @include media('<=phone'){
+      grid-area: 1 / 1 / 1 / 13;
+    }
   }
   &__rc {
     grid-area: 1 / 8 / 1 / 13;
+    @include media('<=phone'){
+      grid-area: 2 / 1 / 2 / 13;
+      margin-top: rem(80);
+    }
   }
 
   &__title {
@@ -116,8 +135,11 @@
       @include txt-label();
       grid-column: label;
       display: flex;
-      align-items: flex-end;
-      margin-bottom: rem(5.5);
+      align-items: flex-start;
+      margin-top: rem(11);
+      @include media('<=phone'){
+        margin-top: rem(8.2);
+      }
     }
 
     &-title {
@@ -134,8 +156,15 @@
 }
 
 .projects {
+  margin-top: rem(120);
+  @include media('<=phone'){
+    margin-top: rem(80);
+  }
   .project{
     grid-area: 1 / 2 / 1 / 12;
+    @include media('<=phone'){
+      grid-area: 1 / 1 / 1 / 13;
+    }
     &__top-row {
       display: flex;
       align-items: center;
@@ -179,12 +208,25 @@
     }
     &__lc {
       grid-column: lc;
+      @include media('<=phone'){
+        grid-area: 1 / 1 / 1 / 13;
+      }
     }
     &__rc {
       grid-column: rc;
+      @include media('<=phone'){
+        grid-area: 2 / 1 / 2 / 13;
+      }
     }
     &__logo {
       max-width: 100%;
+      width: auto;
+      height: auto;
+      @include media('<=phone'){
+        max-width: 200px;
+        max-height: 100px;
+        margin-bottom: rem(15);
+      }
     }
     &__text {
       @include txt-20();
@@ -213,11 +255,21 @@
 
 .reports {
   margin-top: rem(315);
+  @include media('<=phone'){
+    margin-top: rem(80);
+  }
   &__lc {
     grid-area: 1 / 2 / 1 / 7;
+    @include media('<=phone'){
+      grid-area: 2 / 1 / 2 / 13;
+    }
   }
   &__rc{
     grid-area: 1 / 8 / 1 / 12;
+    @include media('<=phone'){
+      grid-area: 1 / 1 / 1 / 13;
+      margin-bottom: rem(30);
+    }
   }
 
   &__title {
@@ -270,11 +322,21 @@
 .grants {
   margin-top: rem(319);
   margin-bottom: rem(155);
+  @include media('<=phone'){
+    margin-top: rem(80);
+    margin-bottom: rem(80);
+  }
   &__lc {
     grid-area: 1 / 2 / 1 / 6;
+    @include media('<=phone'){
+      grid-area: 1 / 1 / 1 / 13;
+    }
   }
   &__rc{
     grid-area: 1 / 6 / 1 / 12;
+    @include media('<=phone'){
+      grid-area: 2 / 1 / 2 / 13;
+    }
   }
   &__lc {
 

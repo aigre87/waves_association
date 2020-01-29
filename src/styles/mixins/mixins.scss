@@ -22,14 +22,23 @@ $browser-context: 16;
 @mixin txt-20(){
   font-size: rem(20);
   line-height: sass-calc(32,20);
+  @include media('<=phone'){
+    font-size: rem(16);
+  }
 }
 @mixin txt-26(){
   font-size: rem(26);
   line-height: sass-calc(32,20);
+  @include media('<=phone'){
+    font-size: rem(22);
+  }
 }
 @mixin txt-label(){
   color: var(--blue);
   text-transform: uppercase;
   font-size: rem(14);
   line-height: sass-calc(16,14);
+  @include media('<=phone'){
+    font-size: rem(12);
+  }
 }

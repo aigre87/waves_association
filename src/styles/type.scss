@@ -10,19 +10,31 @@ h6, .h6{
 h1, .h1{
   font-size: rem(56);
   line-height: sass-calc(72,56);
+  @include media('<=phone'){
+    font-size: rem(30);
+  }
 }
 h2, .h2{
   font-size: rem(40);
   line-height: sass-calc(56,40);
+  @include media('<=phone'){
+    font-size: rem(28);
+  }
 }
 h3, .h3{
   font-size: rem(26);
   line-height: sass-calc(32,26);
+  @include media('<=phone'){
+    font-size: rem(24);
+  }
 }
 h4, .h4{
   font-weight: normal;
   font-size: rem(26);
   line-height: sass-calc(32,26);
+  @include media('<=phone'){
+    font-size: rem(18);
+  }
 }
 h5, .h5{
 

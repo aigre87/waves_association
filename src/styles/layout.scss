@@ -22,4 +22,7 @@ html,body{
     grid-column-gap: var(--grid-column-gap);
     grid-template-columns: repeat(var(--grid-columns), 1fr);
   }
+  @media screen and (max-width: 1160px){
+    padding: 0 20px;
+  }
 }

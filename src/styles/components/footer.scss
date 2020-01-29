@@ -4,41 +4,77 @@
   background: #000;
   padding-top: rem(160);
   padding-bottom: rem(75);
+  @include media('<=phone'){
+    padding-top: rem(50);
+    padding-bottom: rem(50);
+  }
   a{
     color: #fff;
   }
   &__iw {
+    position: relative;
     grid-template-rows: [top] auto [bottom] auto;
     grid-row-gap: rem(156);
+    @include media('<=phone'){
+      grid-row-gap: rem(15);
+    }
   }
   &__menu{
     grid-row: top;
     grid-column: 1 / span 5;
+    @include media('<=phone'){
+      grid-area: 1 / 1 / 1 / 13;
+    }
   }
   &__content {
     grid-row: top;
     grid-column: 6 / -1;
+    @include media('<=phone'){
+      grid-area: 2 / 1 / 2 / 13;
+    }
+  }
+  &__scrolltop {
+
+
   }
   &__scrolltop {
     cursor: pointer;
     grid-row: bottom;
     grid-column: 1 / span 5;
+    @include media('<=phone'){
+      grid-area: 1 / 1 / 1 / 13;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    &-trigger {
+      opacity: 0.5;
+      @include txt-26();
+    }
   }
   &__copyright {
     display: flex;
     align-items: center;
     grid-row: bottom;
     grid-column: 6 / -1;
+    @include media('<=phone'){
+      grid-area: 4 / 1 / 4 / 13;
+    }
   }
 
   &__menu {
     position: relative;
-
+    @include media('<=phone'){
+      margin-bottom: rem(25);
+    }
     &-items {
       display: grid;
       grid-column-gap: var(--grid-column-gap);
       grid-template-columns: repeat(5, 1fr);
       grid-row-gap: rem(16);
+      @include media('<=phone'){
+        grid-row-gap: rem(10);
+      }
     }
     &-item-line{
       width: 100%;
@@ -46,6 +82,9 @@
       pointer-events: none;
       @include txt-20();
       position: relative;
+      @include media('<=phone'){
+        display: none;
+      }
       &:before{
         content: '';
         position: absolute;
@@ -59,6 +98,9 @@
     }
     &-item {
       grid-column: 2/6;
+      @include media('<=phone'){
+        grid-column: 1/7;
+      }
       a {
         @include txt-20();
       }
@@ -82,17 +124,14 @@
 
       &-link {
         @include txt-26();
+        @include media('<=phone'){
+          font-size: rem(20);
+        }
       }
     }
   }
 
-  &__scrolltop {
 
-    &-trigger {
-      opacity: 0.5;
-      @include txt-26();
-    }
-  }
 
   &__copyright {
     @include txt-20();
