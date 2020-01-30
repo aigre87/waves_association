@@ -1,0 +1,18 @@
+.social-links{
+  &__title {
+    @include txt-14();
+  }
+  &__items {
+    margin-top: rem(4);
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__item {
+    flex: 1 1 auto;
+    @include txt-26();
+    margin-right: rem(25);
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}

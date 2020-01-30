@@ -176,31 +176,7 @@
       grid-template-columns: [lc] 3fr [gutter] 1fr [rc] 6fr;
     }
     &__index {
-      @include txt-label();
-      width: rem(113);
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      &__index-form {
-        display: flex;
-        align-items: center;
-      }
 
-      &-line {
-        margin: 0 8px;
-        &:before{
-          content: '';
-          display: block;
-          background: #999999;
-          height: 1px;
-          width: 100%;
-          margin-bottom: 1px;
-        }
-      }
-
-      &-to {
-        color: #999999
-      }
     }
     &__label{
       margin-left: auto;
@@ -234,21 +210,6 @@
 
     &__links {
       margin-top: rem(32);
-      &-title {
-        @include txt-14();
-      }
-      &-items {
-        margin-top: rem(4);
-        display: flex;
-        flex-wrap: wrap;
-      }
-      &-item {
-        @include txt-26();
-        margin-right: 15%;
-        &:last-child{
-          margin-right: 0;
-        }
-      }
     }
   }
 }

@@ -1,0 +1,25 @@
+.label-from-to {
+  @include txt-label();
+  width: rem(113);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  &__form {
+    display: flex;
+    align-items: center;
+  }
+  &__line {
+    margin: 0 8px;
+    &:before{
+      content: '';
+      display: block;
+      background: #999999;
+      height: 1px;
+      width: 100%;
+      margin-bottom: 1px;
+    }
+  }
+  &__to {
+    color: #999999
+  }
+}

@@ -31,6 +31,7 @@
     "parcel-bundler": "^1.12.4",
     "postcss-modules": "^1.5.0",
     "src": "^1.1.2",
+    "susy": "^3.0.5",
     "three": "0.110.0",
     "three-orbit-controls": "^82.1.0"
   }

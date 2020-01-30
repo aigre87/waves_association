@@ -5,6 +5,11 @@ $breakpoints: (
         tablet: 1025px,
         desktop: 1200px,
 );
+/*===============*/
+/*LAYOUT*/
+@import '~susy/sass/susy.scss';
+@import '~susy/sass/plugins/svg-grid';
+/*===============*/
 
 $browser-context: 16;
 @function rem($pixels, $context: $browser-context) {

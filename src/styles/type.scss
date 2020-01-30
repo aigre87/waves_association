@@ -37,7 +37,12 @@ h4, .h4{
   }
 }
 h5, .h5{
-
+  font-weight: normal;
+  font-size: rem(20);
+  line-height: sass-calc(32,20);
+  @include media('<=phone'){
+    font-size: rem(16);
+  }
 }
 h6, .h6{
 
